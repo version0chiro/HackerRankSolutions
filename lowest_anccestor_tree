@@ -1,0 +1,132 @@
+class Node:
+    def __init__(self, info): 
+        self.info = info  
+        self.left = None  
+        self.right = None 
+        self.level = None 
+
+    def __str__(self):
+        return str(self.info) 
+
+class BinarySearchTree:
+    def __init__(self): 
+        self.root = None
+
+    def create(self, val):  
+        if self.root == None:
+            self.root = Node(val)
+        else:
+            current = self.root
+         
+            while True:
+                if val < current.info:
+                    if current.left:
+                        current = current.left
+                    else:
+                        current.left = Node(val)
+                        break
+                elif val > current.info:
+                    if current.right:
+                        current = current.right
+                    else:
+                        current.right = Node(val)
+                        break
+                else:
+                    break
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+'''
+class Node:
+      def __init__(self,info): 
+          self.info = info  
+          self.left = None  
+          self.right = None 
+           
+
+       // this is a node of the tree , which contains info as data, left , right
+'''
+path1=[]
+path2=[]
+
+def hasPath(root, arr, x): 
+      
+    # if root is None there is no path  
+    if (not root): 
+        return False
+      
+    # push the node's value in 'arr'  
+    arr.append(root.info)      
+      
+    # if it is the required node  
+    # return true  
+    if (root.info == x):      
+        return True
+      
+    # else check whether the required node  
+    # lies in the left subtree or right  
+    # subtree of the current node  
+    if (hasPath(root.left, arr, x) or 
+        hasPath(root.right, arr, x)):  
+        return True
+      
+    # required node does not lie either in  
+    # the left or right subtree of the current  
+    # node. Thus, remove current node's value   
+    # from 'arr'and then return false      
+    arr.pop(-1)  
+    return False
+
+def ifNodeExists(node, key): 
+  
+    if (node == None):  
+        return False
+  
+    if (node.info == key):  
+        return node
+  
+    """ then recur on left sutree """
+    res1 = ifNodeExists(node.left, key)  
+    if res1: 
+        return node # node found, no need to look further 
+  
+    """ node is not found in left, so recur on right subtree """
+    res2 = ifNodeExists(node.right, key)  
+  
+    return res2
+
+def common_member(a, b): 
+    a_set = set(a) 
+    b_set = set(b) 
+  
+    if (a_set & b_set): 
+        return (a_set & b_set)
+
+def lca(root, v1, v2):
+    start=root
+    arr=[]
+    # printPreorder(start,v2)
+    hasPath(root, arr, v1)
+    arr2=[]
+    hasPath(root, arr2, v2)
+    ans=list(common_member(arr,arr2))
+    print(ans)
+    results = list(map(int, ans))
+    # a=ans[-1]
+    a=min(results)
+    print(a)
+    # print(findRoot(start,a))
+    return ifNodeExists(start,str(a)))
+  #Enter your code here
+
+tree = BinarySearchTree()
+t = int(input())
+
+arr = list(map(int, input().split()))
+
+for i in range(t):
+    tree.create(arr[i])
+
+v = list(map(int, input().split()))
+
+ans = lca(tree.root, v[0], v[1])
+print (ans.info)
