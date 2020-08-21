@@ -1,0 +1,29 @@
+'''
+# Sample code to perform I/O:
+
+name = input()                  # Reading input from STDIN
+print('Hi, %s.' % name)         # Writing output to STDOUT
+
+# Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+'''
+import math
+
+# Write your code here
+t=input()
+t=int(t)
+while(t>0):
+    c=0
+    ans=[]
+    n=input()
+    n=int(n)
+    while(n>0):
+        p=int(math.log(n,2))
+        # answer=str(3**p)+" "+answer
+        ans.append(3**p)
+        n=n%(2**p)
+        c=c+1
+    ans.reverse()
+    print(c)
+    # print(len(answer.split(" "))-1)
+    print(*ans, sep = " ")
+    t=t-1
